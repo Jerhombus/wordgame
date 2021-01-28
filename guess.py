@@ -2,7 +2,7 @@ import random
 # Intro instructions
 def intro():
     print(':+'*50)
-    print("""Welcome to Guess The Word""")
+    print("""          Welcome to Guess The Word""")
     print(':+'*50)
 # Splitting the letters in a word
 def split(word):
@@ -10,28 +10,34 @@ def split(word):
 
 #replaces Word needed to all underscores
 def make_list_underscore(w_list):
-    for i in range(len(w_list)):
-        w_list[i] = '_'
-    return w_list
+    new_list = w_list 
+    for i in range(len(new_list)):
+        new_list[i] = '_'
+    return new_list
 
-
+def show_current(word, guessed_list):
+    new_display= {}
+    for letter in word:
+        if letter in guessed_list:
+            new_display.append(letter)
+        else:
+            new_display.append("_")
+    print (" ".join(new_display))    
+    
 #User input. Returns the under_score list with the correct letters guessed.
 def guess(underscore_list,w_list):
-    num_tries = 7
     u_input = input("What letter would you like to guess?: ").lower
-    while num_tries > 0:
-        for k in range(len(underscore_list)):
-            for i in w_list:
-                if num_tries == 0:
-                    print("Game Over")
-                    break
-                elif u_input == i and underscore_list[k] != w_list[k]:
-                    underscore_list[k] = w_list[k]
-                elif u_input != i:
-                    num_tries -= 1
-                    print(f"Try again! You have {num_tries} times left")
-                else:
-                    print("You already entered that letter. Try again.")
+    for k in range(len(underscore_list)):
+        for i in w_list:
+            if u_input == i and underscore_list[k] != w_list[k]:
+                underscore_list[k] = w_list[k]
+            elif u_input != i:
+                print(i)
+                print(w_list)
+                print(underscore_list[k])
+                return False
+            else:
+                print("You already entered that letter. Try again.")
     return underscore_list[k]
             
 
@@ -74,16 +80,19 @@ gameOver = False
 while not done:
        #Asking if the user wants to play again after the game is over
        #Giving the user an option to quit the game
-    user_input = input("Would you like to quit: 'q'")
-    if user_input== 'q':
-        break
-    else:
-        intro()
-        gameOver = False
-        new_word = get_new_word(wordlist)
-        underscored_word = make_list_underscore(new_word)
-        while not gameOver:
-            guess(underscored_word,new_word)
+    # user_input = input("Would you like to quit: 'q'")
+    # if user_input== 'q':
+    #     break
+    # else:
+    intro()
+    gameOver = False
+    new_word = get_new_word(wordlist)
+    
+    underscored_word = make_list_underscore(new_word)
+    print(underscored_word)
+    print(new_word)
+    while not gameOver:
+        print(guess(underscored_word,new_word))
 
     
 #game will stop either when times_allowed decrease to 0, or when done = True, when word is guessed right 
