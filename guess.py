@@ -2,7 +2,7 @@ import random
 # Intro instructions
 def intro():
     print(':+'*50)
-    print("""          Welcome to Guess The Word""")
+    print("""                               Welcome to Guess The Word""")
     print(':+'*50)
 # Splitting the letters in a word
 def split(word):
@@ -87,8 +87,8 @@ while not done:
     intro()
     gameOver = False
     new_word = get_new_word(wordlist)
-    
-    underscored_word = make_list_underscore(new_word)
+    u_word = new_word
+    underscored_word = make_list_underscore(u_word)
     print(underscored_word)
     print(new_word)
     while not gameOver:
@@ -107,7 +107,3 @@ while not done:
     #     else:
     #         print(f"Try again! You have {times_allowed} times left")
 
-    
-
-
-    
